@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+# Self Attention Layer
 
 class SelfAttention(nn.Module):
     def __init__(self,embed_size, heads):
