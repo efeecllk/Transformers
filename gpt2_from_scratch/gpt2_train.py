@@ -4,6 +4,14 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
+
+
+class CasualSelfAttention(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        
+
+
 class MLP(nn.Module):
     def __init__(self):
         super().__init__()
