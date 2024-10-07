@@ -9,13 +9,21 @@ from torch.nn import functional as F
 class CasualSelfAttention(nn.Module):
     def __init__(self, config):
         super().__init__()
-        
+        assert config.n_embd % config.n_head == 0
+        self.c_attn = nn.Linear(config.n_embd, config.n_embd * 3)
+        self.c_proj = nn.Linear(config.n_embd, config.n_embd)
+
+        self.n_head = config.n_head
+        self.n_embd = config.n_embd
+
+
+
 
 
 class MLP(nn.Module):
     def __init__(self):
         super().__init__()
-        self.c_fc = nn.Linear(config.n_embd, config.n_embd * 4)
+        self.c_fc = nn.Linear( .n_embd, config.n_embd * 4)
         self.gelu = nn.GELU(approximate='tanh')
         self.c_proj = nn.Linear(config.n_embd * 4, config.n_embd)
 
@@ -43,11 +51,11 @@ class Block(nn.Module):
 
 @dataclass
 class GPTConfig:
-    vocab_size: int = 65
-    block_size: int = 256
-    n_layer: int = 6
-    n_head: int = 6
-    n_embd: int = 384
+    vocab_size: int = 50257
+    block_size: int = 1024
+    n_layer: int = 12
+    n_head: int = 12
+    n_embd: int = 768
 
 
 class GPT(nn.Module):
