@@ -16,6 +16,11 @@ class CasualSelfAttention(nn.Module):
         self.n_head = config.n_head
         self.n_embd = config.n_embd
 
+    def forward(self, x):
+        B, T, C = x.size()
+
+        qkv = self.c_attn(x)
+
 
 
 
@@ -23,9 +28,10 @@ class CasualSelfAttention(nn.Module):
 class MLP(nn.Module):
     def __init__(self):
         super().__init__()
-        self.c_fc = nn.Linear( .n_embd, config.n_embd * 4)
+        self.c_fc = nn.Linear(config.n_embd, config.n_embd * 4)
         self.gelu = nn.GELU(approximate='tanh')
         self.c_proj = nn.Linear(config.n_embd * 4, config.n_embd)
+
 
 
     def forward(self, x):
